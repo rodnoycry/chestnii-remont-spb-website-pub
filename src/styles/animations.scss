@@ -1,0 +1,162 @@
+@mixin hideTapHighlightColor() {
+    //Prevent highlight colour when element is tapped
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+@mixin hardwareAccel() {
+    //Improve performance on mobile/tablet devices
+    transform: translateZ(0);
+}
+
+@mixin improveAntiAlias() {
+    //Improve aliasing on mobile/tablet devices
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+.animate-hover-float {
+    transition-duration: 300ms;
+    transition-property: transform;
+
+    @include hideTapHighlightColor();
+    @include hardwareAccel();
+    @include improveAntiAlias();
+
+    &:hover {
+        transform: translateY(-3px);
+    }
+}
+
+.animate-hover-elevate-children {
+    transition-duration: 300ms;
+    transition-property: scale;
+    @include hideTapHighlightColor();
+    @include hardwareAccel();
+    @include improveAntiAlias();
+
+    &:hover {
+        scale: 1.02;
+    }
+}
+
+.animate-hover-elevate-children > * {
+    transition-duration: 300ms;
+    transition-property: filter;
+
+    @include hideTapHighlightColor();
+    @include hardwareAccel();
+    @include improveAntiAlias();
+
+    &:hover {
+        filter: drop-shadow(0 8px 3px rgb(0 0 0 / 0.07))
+            drop-shadow(0 4px 2px rgb(0 0 0 / 0.06));
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: var(--fade-in-opacity);
+    }
+}
+
+.fade-in-0_3 {
+    --fade-in-opacity: 0.3;
+    animation: fadeIn ease 2s;
+    animation-fill-mode: forwards;
+}
+
+.fade-in-1 {
+    --fade-in-opacity: 1;
+    animation: fadeIn ease 2s;
+    animation-fill-mode: forwards;
+}
+
+.animate-shining {
+    --duration: 5s;
+    overflow: hidden;
+}
+
+.animate-shining-fast {
+    --duration: 3s;
+    overflow: hidden;
+}
+
+/* Create the shine effect */
+.animate-shining::before,
+.animate-shining-fast::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 300%;
+    height: 130%;
+    transform: rotate(30deg);
+    opacity: 1;
+    transition: opacity 0.2s;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.5) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    animation: shine var(--duration) infinite linear;
+}
+
+.animate-shining:hover::before {
+    opacity: 0;
+}
+
+/* Shine animation */
+@keyframes shine {
+    from {
+        transform: translateX(-50%) rotate(30deg);
+    }
+    to {
+        transform: translateX(200%) rotate(30deg);
+    }
+}
+
+// Arrow dip animation
+.animate-point-down {
+    --dip-depth: 20px;
+    animation: dipAnimation 6s infinite;
+    transition-duration: 300ms;
+    transition-property: transform;
+
+    @include hideTapHighlightColor();
+    @include hardwareAccel();
+    @include improveAntiAlias();
+
+    &:hover {
+        transform: translateY(var(dip-depth));
+        animation: none;
+    }
+}
+
+@keyframes dipAnimation {
+    0%,
+    8.33%,
+    16.66%,
+    83.34%,
+    91.67%,
+    100% {
+        transform: translateY(0);
+    }
+    0% {
+        transform: translateY(0);
+    }
+    3.5% {
+        transform: translateY(var(--dip-depth));
+    }
+    8% {
+        transform: translateY(0);
+    }
+    11.5% {
+        transform: translateY(var(--dip-depth));
+    }
+    17% {
+        transform: translateY(0);
+    }
+}

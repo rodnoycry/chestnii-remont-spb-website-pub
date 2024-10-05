@@ -1,0 +1,44 @@
+.borders-container {
+    /* --border-colorgb(228, 212, 184)1b2; */
+    --border-color: #fde1b2;
+    --border-width: 0.56rem;
+    --border-radius: calc(
+        var(--border-width) / 2
+    ); /* Half of the border width for rounded ends */
+
+    position: relative;
+}
+
+.border-side {
+    position: absolute;
+    background-color: var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+.border-side.top {
+    top: 0;
+    left: 0;
+    height: var(--border-width);
+    width: 90%;
+}
+
+.border-side.right {
+    top: 50%;
+    right: 0;
+    width: var(--border-width);
+    height: 50%;
+}
+
+.border-side.bottom {
+    bottom: 0;
+    right: 0;
+    height: var(--border-width);
+    width: 90%;
+}
+
+.border-side.left {
+    top: 0;
+    left: 0;
+    width: var(--border-width);
+    height: 50%;
+}
